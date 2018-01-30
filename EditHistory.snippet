@@ -1,0 +1,130 @@
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">EditHistory</_locTag>
+    <_locTag _loc="locData">EditHistoryTables</_locTag>
+    <_locTag _loc="locData">RobertSmith</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+<CodeSnippet Format="1.0.0">
+<Header>
+<Title>Extended EditHistory Template</Title>
+       <Shortcut></Shortcut>
+<Description>Example Snippet for EditHistory</Description>
+<Author>RobertSmith</Author>
+<SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+</SnippetTypes>
+</Header>
+<Snippet>
+<Declarations>
+  <Literal>
+    <ID>old</ID>
+    <ToolTip>oldcolumn</ToolTip>
+    <Default>oldcolumn</Default>
+  </Literal>
+  <Literal>
+  	<ID>new</ID>
+  	<ToolTip>newcolumn</ToolTip>
+  	<Default>newcolumn</Default>
+	</Literal>
+    <Literal>
+  	<ID>db</ID>
+  	<ToolTip>Database</ToolTip>
+  	<Default>BullhornXXXX</Default>
+	</Literal>
+	<Literal>
+  	<ID>newtemptable</ID>
+  	<ToolTip>Newtemptable</ToolTip>
+  	<Default>pstmp_date_thing</Default>
+	</Literal>
+	<Literal>
+  	<ID>tablechange</ID>
+  	<ToolTip>TabletobeChange</ToolTip>
+  	<Default>BH_UserContact</Default>
+	</Literal>
+</Declarations>
+<!-- A comment here must be an XML comment, not a T-SQL comment -->
+<Code Language="SQL"><![CDATA[/***************************************************************************************************************
+* corp name:	     Corp Name
+* db info:		\ / 
+* rows:			 +  + 
+* By:			 
+* Created:		
+* Description:	See spec
+****************************************************************************************************************/
+
+USE $db$
+
+--1. Candidate
+SELECT
+	 userID	= uc.userID
+	,$old$	= uc.customText15
+	,$new$	= pl.status
+	,customDate2_OLD	= uc.customDate2
+	,customDate2_NEW	= pl.dateEnd
+	,customText18_OLD	= uc.customText18
+	,customText18_NEW	= 'Yes  &#128309;'
+	,migrateGUID		= NEWID()
+INTO $db$.pstmp.$newtemptable$
+FROM $db$.bullhorn1.$tablechange$ uc
+
+CREATE UNIQUE CLUSTERED INDEX x ON $db$.pstmp.$newtemptable$ (userID)
+CREATE UNIQUE INDEX y ON $db$.pstmp.$newtemptable$ (migrateGUID)
+
+UPDATE uc
+SET customText15	= x.$new$
+	,customDate2	= x.customDate2_NEW
+	,customText18	= x.customText18_NEW
+FROM $db$.bullhorn1.$tablechange$ uc
+	JOIN $db$.pstmp.$newtemptable$ x
+		ON uc.userID = x.userID
+		
+DECLARE @updatingUserID INT =
+	(SELECT TOP 1 uv.userID
+		FROM $db$.bullhorn1.BH_User_view uv
+			JOIN $db$.bullhorn1.BH_UserContact uc
+				ON uv.userID = uc.userID
+					AND uc.recordTypeBits = 4
+		WHERE uv.name LIKE '%.unassigned'
+		ORDER BY uv.userID)
+INSERT INTO $db$.bullhorn1.BH_UserEditHistory(
+	userID,
+	dateAdded,
+	updatingUserID,
+	auditTrail,
+	migrateGUID)
+SELECT
+	userID = x.userID,
+	dateAdded = GETDATE(),
+	updatingUserID = @updatingUserID, --SELECT TOP 1 userID FROM $db$.bullhorn1.BH_User_view u (nolock) WHERE u.name like '%.unassigned'
+	auditTrail = '<table cellpadding=2 cellspacing=0 border=0 width="100%"><tr><td><strong>Field</strong></td><td><strong>From</strong></td><td><strong>To</strong></td></tr>'
+		+'<tr><td valign=top style=''''border-top:1px solid #dddddd;''''>'
+			+/*field label*/'Last Placement Status</td><td valign=top style=''''border-top:1px solid #dddddd;''''>' 
+			+/*OLD value*/ ISNULL(CAST(x.$old$ AS VARCHAR(MAX)),'[Blank]') + '</td><td valign=top style=''''border-top:1px solid #dddddd;''''>' 
+			+/*NEW value*/ ISNULL(CAST(x.$new$ AS VARCHAR(MAX)),'[Blank]') + '</td>'
+	+'</table>',
+	migrateGUID = x.migrateGUID
+FROM $db$.pstmp.$newtemptable$ x
+
+INSERT INTO $db$.bullhorn1.BH_UserEditHistoryFieldChange(
+	userEditHistoryID,
+	columnName,
+	display,
+	oldValue,
+	newValue)
+SELECT
+	userEditHistoryID = eh.userEditHistoryID,
+	columnName = 'customText15',
+	display = 'Last Placement Status',
+	oldValue = ISNULL(CAST(x.$old$ AS VARCHAR(MAX)),'[Blank]'),
+	newValue = ISNULL(CAST(x.$new$ AS VARCHAR(MAX)),'[Blank]')
+FROM $db$.pstmp.$newtemptable$ x
+	JOIN $db$.bullhorn1.BH_UserEditHistory eh
+		ON x.migrateGUID = eh.migrateGUID
+go]]>
+</Code>
+</Snippet>
+</CodeSnippet>
+</CodeSnippets>

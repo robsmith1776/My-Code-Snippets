@@ -1,0 +1,45 @@
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+<CodeSnippet Format="1.0.0">
+<Header>
+<Title>Cast As TRY_CAST ( expression AS data_type [ ( length ) ] )  </Title>
+       <Shortcut></Shortcut>
+<Description>TRY_CAST ( expression AS data_type [ ( length ) ] )  </Description>
+<Author>RCS</Author>
+<SnippetTypes>
+      <SnippetType>SurroundsWith</SnippetType>
+</SnippetTypes>
+</Header>
+<Snippet>
+<Declarations>
+      <Literal>
+      <ID>CastItem</ID>
+      <ToolTip>Here is where you Cast.</ToolTip>
+      <Default>50</Default>
+      </Literal>
+      <Literal>
+      <ID>CastType</ID>
+      <ToolTip>Here is where you Cast float.</ToolTip>
+      <Default>float</Default>
+      </Literal>
+      <Literal>
+      <ID>CastLength</ID>
+      <ToolTip>Here is where you Cast length.</ToolTip>
+      <Default>50</Default>
+      </Literal>
+</Declarations>
+<!-- A comment here must be an XML comment, not a T-SQL comment -->
+<Code Language="SQL"><![CDATA[TRY_CAST ( $selected$ AS $CastType$ ( $CastLength$ ))$end$]]>
+<!-- TRY_CAST ( expression AS data_type [ ( length ) ] )   -->
+<!-- cast($selected$ $end$ as nvarchar($CastItem$))   -->
+</Code>
+</Snippet>
+</CodeSnippet>
+</CodeSnippets>
