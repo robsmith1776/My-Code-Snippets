@@ -1,0 +1,44 @@
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">coalesce</_locTag>
+    <_locTag _loc="locData">coalesce</_locTag>
+    <_locTag _loc="locData">RobertSmith</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+<CodeSnippet Format="1.0.0">
+<Header>
+<Title>Unassigned User Template</Title>
+       <Shortcut></Shortcut>
+<Description>Example Snippet for Unassigned User</Description>
+<Author>RobertSmith</Author>
+<SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+</SnippetTypes>
+</Header>
+<Snippet>
+<Declarations>
+  <Literal>
+    <ID>SchemaName</ID>
+    <ToolTip>Name of the schema</ToolTip>
+    <Default>bullhorn1</Default>
+  </Literal>
+  <Literal>
+  	<ID>Database</ID>
+  	<ToolTip>Name of the Database</ToolTip>
+  	<Default>BULLHORN</Default>
+	</Literal>
+</Declarations>
+<!-- A comment here must be an XML comment, not a T-SQL comment -->
+<Code Language="SQL"><![CDATA[SELECT TOP 1 uv.userID
+                                  FROM $Database$.$SchemaName$.BH_User_view uv
+                                       JOIN $Database$.$SchemaName$.BH_UserContact uc
+                                         ON uv.userID = uc.userID
+                                            AND uc.recordTypeBits = 4
+                                  WHERE uv.name LIKE '%.unassigned'
+                                  ORDER BY uv.userID]]>
+</Code>
+</Snippet>
+</CodeSnippet>
+</CodeSnippets>

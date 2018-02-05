@@ -22,19 +22,19 @@
   <Literal>
     <ID>SchemaName</ID>
     <ToolTip>Name of the schema</ToolTip>
-    <Default>dbo</Default>
+    <Default>pstmp</Default>
   </Literal>
   <Literal>
   	<ID>TableName</ID>
   	<ToolTip>Name of the table</ToolTip>
-  	<Default>TableName</Default>
+  	<Default>pstmp_201802__</Default>
 	</Literal>
 </Declarations>
 <!-- A comment here must be an XML comment, not a T-SQL comment -->
 <Code Language="SQL"><![CDATA[
-if exists (select 1 from sys.tables where name = '$TableName$')
+if exists (select 1 from sys.tables where name = '_pstmp_201802__$TableName$')
 begin
-drop table $SchemaName$.$TableName$
+drop table $SchemaName$._pstmp_201802__$TableName$
 end
 
 ]]>
