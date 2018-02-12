@@ -1,17 +1,17 @@
 <CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
 <_locDefinition xmlns="urn:locstudio">
     <_locDefault _loc="locNone" />
-    <_locTag _loc="locData">DropExist</_locTag>
-    <_locTag _loc="locData">DropExistTables</_locTag>
+    <_locTag _loc="locData">coalesce</_locTag>
+    <_locTag _loc="locData">coalesce</_locTag>
     <_locTag _loc="locData">RobertSmith</_locTag>
     <_locTag _loc="locData">ToolTip</_locTag>
    <_locTag _loc="locData">Default</_locTag>
 </_locDefinition>
 <CodeSnippet Format="1.0.0">
 <Header>
-<Title>Extended DropExists Template</Title>
+<Title>IDENTITY_INSERT Template</Title>
        <Shortcut></Shortcut>
-<Description>Example Snippet for DropExists</Description>
+<Description>Example Snippet for IDENTITY_INSERT</Description>
 <Author>RobertSmith</Author>
 <SnippetTypes>
       <SnippetType>Expansion</SnippetType>
@@ -22,22 +22,21 @@
   <Literal>
     <ID>SchemaName</ID>
     <ToolTip>Name of the schema</ToolTip>
-    <Default>pstmp</Default>
+    <Default>Bullhorn1</Default>
   </Literal>
   <Literal>
   	<ID>TableName</ID>
   	<ToolTip>Name of the table</ToolTip>
-  	<Default>pstmp_201802__</Default>
+  	<Default>TableName</Default>
+	</Literal>
+	  <Literal>
+  	<ID>Database</ID>
+  	<ToolTip>Name of the Database</ToolTip>
+  	<Default>Database</Default>
 	</Literal>
 </Declarations>
 <!-- A comment here must be an XML comment, not a T-SQL comment -->
-<Code Language="SQL"><![CDATA[
-if exists (select 1 from sys.tables where name = '$TableName$')
-begin
-drop table $SchemaName$.$TableName$
-end
-
-]]>
+<Code Language="SQL"><![CDATA[SET IDENTITY_INSERT [$Database$].[$SchemaName$].[$TableName$] ON]]>
 </Code>
 </Snippet>
 </CodeSnippet>
