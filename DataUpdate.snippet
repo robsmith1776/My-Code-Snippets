@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+   <_locDefinition xmlns="urn:locstudio">
+      <_locDefault _loc="locNone" />
+      <_locTag _loc="locData">DataUpdateTemplate</_locTag>
+      <_locTag _loc="locData">DataUpdateTemplateTables</_locTag>
+      <_locTag _loc="locData">RobertSmith</_locTag>
+      <_locTag _loc="locData">ToolTip</_locTag>
+      <_locTag _loc="locData">Default</_locTag>
+   </_locDefinition>
+   <CodeSnippet Format="1.0.0">
+      <Header>
+         <Title>Extended DataUpdate Template</Title>
+         <Shortcut />
+         <Description>Example Snippet for DataUpdateTemplate</Description>
+         <Author>RobertSmith</Author>
+         <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+         </SnippetTypes>
+      </Header>
+      <Snippet>
+         <Declarations>
+            <Literal>
+               <ID>Ticket</ID>
+               <ToolTip>Name of the ticket</ToolTip>
+               <Default>CE-</Default>
+            </Literal>
+            <Literal>
+               <ID>Author</ID>
+               <ToolTip>Name of the Author</ToolTip>
+               <Default>Robert C Smith</Default>
+            </Literal>
+            <Literal>
+               <ID>Date</ID>
+               <ToolTip>Date</ToolTip>
+               <Default>2018.02.</Default>
+            </Literal>
+            <Literal>
+               <ID>Client</ID>
+               <ToolTip>Client</ToolTip>
+               <Default>Client</Default>
+            </Literal>
+            <Literal>
+               <ID>Instance</ID>
+               <ToolTip>Instance</ToolTip>
+               <Default>BULLHORN_LG</Default>
+            </Literal>
+            <Literal>
+               <ID>Database</ID>
+               <ToolTip>Database</ToolTip>
+               <Default>BULLHORN</Default>
+            </Literal>
+            <Literal>
+               <ID>Rows</ID>
+               <ToolTip>Rows</ToolTip>
+               <Default>Rows</Default>
+            </Literal>
+            <Literal>
+               <ID>TempTables</ID>
+               <ToolTip>TempTables</ToolTip>
+               <Default>TempTables</Default>
+            </Literal>
+         </Declarations>
+         <!-- A comment here must be an XML comment, not a T-SQL comment -->
+         <Code Language="SQL"><![CDATA[/*
+	Ticket $Ticket$
+	Author: $Author$
+	Date: $Date$
+	Client: $Client$ 
+	Instance/Database: $Instance$ / $Database$
+	Rows: $Rows$
+	Temp Tables: $TempTables$
+	
+	
+	Add Notes
+	
+*/]]></Code>
+      </Snippet>
+   </CodeSnippet>
+</CodeSnippets>
