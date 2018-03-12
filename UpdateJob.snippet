@@ -1,17 +1,17 @@
 <CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
    <_locDefinition xmlns="urn:locstudio">
       <_locDefault _loc="locNone" />
-      <_locTag _loc="locData">UpdateCandidate</_locTag>
-      <_locTag _loc="locData">UpdateCandidateTables</_locTag>
+      <_locTag _loc="locData">UpdateJob</_locTag>
+      <_locTag _loc="locData">UpdateJobTables</_locTag>
       <_locTag _loc="locData">RobertSmith</_locTag>
       <_locTag _loc="locData">ToolTip</_locTag>
       <_locTag _loc="locData">Default</_locTag>
    </_locDefinition>
    <CodeSnippet Format="1.0.0">
       <Header>
-         <Title>Extended UpdateCandidate Template</Title>
+         <Title>Extended UpdateJob Template</Title>
          <Shortcut />
-         <Description>Example Snippet for UpdateCandidate</Description>
+         <Description>Example Snippet for UpdateJob</Description>
          <Author>RobertSmith</Author>
          <SnippetTypes>
             <SnippetType>Expansion</SnippetType>
@@ -25,9 +25,9 @@
                <Default>pstmp</Default>
             </Literal>
             <Literal>
-               <ID>ExCand</ID>
-               <ToolTip>External Candidate TableName</ToolTip>
-               <Default>Person</Default>
+               <ID>ExJob</ID>
+               <ToolTip>External Job TableName</ToolTip>
+               <Default>jobid</Default>
             </Literal>
             <Literal>
                <ID>TableName</ID>
@@ -37,33 +37,27 @@
 			<Literal>
                <ID>IDColumn</ID>
                <ToolTip>Name of the ID Column</ToolTip>
-               <Default>CandidateID</Default>
-            </Literal>
-			<Literal>
-               <ID>BHTable</ID>
-               <ToolTip>Name of the Bullhorn Table</ToolTip>
-               <Default>BH_UserContact</Default>
+               <Default>JobID</Default>
             </Literal>
          </Declarations>
          <!-- A comment here must be an XML comment, not a T-SQL comment -->
-         <Code Language="SQL"><![CDATA[Select $end$,P.Bullhornuserid
+         <Code Language="SQL"><![CDATA[Select $end$,P.Bullhornjobpostingid,p.externalid
 INTO $SchemaName$.$TableName$
-FROM $ExCand$ ExCand
-	INNER JOIN _Person P
-	  ON P.Externalid = ExCand.$IDColumn$
-	INNER JOIN $BHTable$ Candidate
-	  ON Candidate.Userid = P.Bullhornuserid
+FROM $ExJob$ ExJob
+	INNER JOIN _jobposting P
+	  ON P.Externalid = ExJob.$IDColumn$
+	INNER JOIN Bh_jobposting Job
+	  ON Job.jobpostingid = P.Bullhornjobpostingid
 WHERE 1 = 1
-	-- AND Bullhornuserid IN('12649', '26219')
-	AND Recordtype = 1
+	-- AND Bullhornjobpostingid IN('12649', '26219')
 
 
 UPDATE A
 SET
     A. = New_
-FROM $BHTable$ A
+FROM BH_jobposting A
 	INNER JOIN $SchemaName$.$TableName$ Tmp
-	  ON Tmp.Bullhornuserid = A.Userid
+	  ON Tmp.Bullhornjobpostingid = A.jobpostingid
 	  where recordTypeBits = 1
 
 -- drop table $SchemaName$.$TableName$]]></Code>
