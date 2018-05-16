@@ -1,17 +1,17 @@
 <CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
 <_locDefinition xmlns="urn:locstudio">
     <_locDefault _loc="locNone" />
-    <_locTag _loc="locData">DropExist</_locTag>
-    <_locTag _loc="locData">DropExistTables</_locTag>
+    <_locTag _loc="locData">CreateSchema</_locTag>
+    <_locTag _loc="locData">CreateSchemaTables</_locTag>
     <_locTag _loc="locData">RobertSmith</_locTag>
     <_locTag _loc="locData">ToolTip</_locTag>
    <_locTag _loc="locData">Default</_locTag>
 </_locDefinition>
 <CodeSnippet Format="1.0.0">
 <Header>
-<Title>Extended DropExists Template</Title>
+<Title>Extended CreateSchema Template</Title>
        <Shortcut></Shortcut>
-<Description>Example Snippet for DropExists</Description>
+<Description>Example Snippet for CreateSchema</Description>
 <Author>RobertSmith</Author>
 <SnippetTypes>
       <SnippetType>Expansion</SnippetType>
@@ -24,19 +24,13 @@
     <ToolTip>Name of the schema</ToolTip>
     <Default>pstmp</Default>
   </Literal>
-  <Literal>
-  	<ID>TableName</ID>
-  	<ToolTip>Name of the table</ToolTip>
-  	<Default>pstmp_201805</Default>
-	</Literal>
 </Declarations>
 <!-- A comment here must be an XML comment, not a T-SQL comment -->
 <Code Language="SQL"><![CDATA[
-if exists (select 1 from sys.tables where name = '$TableName$')
-begin
-drop table $SchemaName$.$TableName$
-end
-
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = '$SchemaName$')
+BEGIN
+EXEC('CREATE SCHEMA $SchemaName$')
+END
 ]]>
 </Code>
 </Snippet>
