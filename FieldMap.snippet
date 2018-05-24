@@ -1,0 +1,58 @@
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">coalesce</_locTag>
+    <_locTag _loc="locData">coalesce</_locTag>
+    <_locTag _loc="locData">RobertSmith</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+<CodeSnippet Format="1.0.0">
+<Header>
+<Title>BH_Fieldmap Template</Title>
+       <Shortcut></Shortcut>
+<Description>Example Snippet for BH_Fieldmap</Description>
+<Author>RobertSmith</Author>
+<SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+</SnippetTypes>
+</Header>
+<Snippet>
+<Declarations>
+  <Literal>
+    <ID>SchemaName</ID>
+    <ToolTip>Name of the schema</ToolTip>
+    <Default>Bullhorn1</Default>
+  </Literal>
+  <Literal>
+  	<ID>TableName</ID>
+  	<ToolTip>Name of the table</ToolTip>
+  	<Default>BH_Fieldmap</Default>
+	</Literal>
+	  <Literal>
+  	<ID>Database</ID>
+  	<ToolTip>Name of the Database</ToolTip>
+  	<Default>Database</Default>
+	</Literal>
+	<Literal>
+  	<ID>Entity</ID>
+  	<ToolTip>Name of the Entity</ToolTip>
+  	<Default>Entity</Default>
+	</Literal>
+	<Literal>
+  	<ID>ColumnName</ID>
+  	<ToolTip>Name of the ColumnName</ToolTip>
+  	<Default>ColumnName</Default>
+	</Literal>
+</Declarations>
+<!-- A comment here must be an XML comment, not a T-SQL comment -->
+<Code Language="SQL"><![CDATA[ 	SELECT * 
+FROM [$Database$].[$SchemaName$].[$TableName$]
+where entity = '$Entity$'
+and columnName like '%$ColumnName$%'
+--- and Display like '%%'
+/* Candidate,Client,Client Contact,Job Posting,Placement */]]>
+</Code>
+</Snippet>
+</CodeSnippet>
+</CodeSnippets>
