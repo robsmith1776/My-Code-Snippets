@@ -22,7 +22,7 @@
   <Literal>
     <ID>SchemaName</ID>
     <ToolTip>Name of the schema</ToolTip>
-    <Default>Bullhorn1</Default>
+    <Default>dbo</Default>
   </Literal>
   <Literal>
   	<ID>TableName</ID>
@@ -47,7 +47,7 @@
 </Declarations>
 <!-- A comment here must be an XML comment, not a T-SQL comment -->
 <Code Language="SQL"><![CDATA[ 	SELECT * 
-FROM [$Database$].[$SchemaName$].[$TableName$]
+FROM [$Database$].[$SchemaName$].[BH_Fieldmap]
 where entity = '$Entity$'
 and columnName like '%$ColumnName$%'
 --- and Display like '%%'
