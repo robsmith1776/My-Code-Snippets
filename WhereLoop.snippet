@@ -1,0 +1,37 @@
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+<CodeSnippet Format="1.0.0">
+<Header>
+<Title>WhereLoop</Title>
+       <Shortcut></Shortcut>
+<Description>WhereLoop</Description>
+<Author>RCS</Author>
+<SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+</SnippetTypes>
+</Header>
+<Snippet>
+<Declarations>
+      <Literal>
+      <ID>CastItem</ID>
+      <ToolTip>Here is where you Cast.</ToolTip>
+      <Default>50</Default>
+      </Literal>
+</Declarations>
+<!-- A comment here must be an XML comment, not a T-SQL comment -->
+<Code Language="SQL"><![CDATA[WHERE x.ID <= 50000
+	--WHERE x.ID BETWEEN 50001 AND 100000
+	--WHERE x.ID BETWEEN 100001 AND 150000
+	--WHERE x.ID BETWEEN 150001 AND 200000
+	--WHERE x.ID BETWEEN 200001 AND 250000]]>
+</Code>
+</Snippet>
+</CodeSnippet>
+</CodeSnippets>
