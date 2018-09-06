@@ -50,12 +50,14 @@
 INTO $SchemaName$.$TableName$
 FROM $ExCand$ ExCand
 	INNER JOIN _Person P
-	  ON P.Externalid = ExCand.$IDColumn$
+	  ON P.Externalid = cast(ExCand.$IDColumn$ as nvarchar(50))
+		AND P.Recordtype = 1
+	INNER JOIN BH_User u
+	  ON u.Externalid = p.Externalid
 	INNER JOIN $BHTable$ Candidate
-	  ON Candidate.Userid = P.Bullhornuserid
+	  ON Candidate.Userid = u.Userid
 WHERE 1 = 1
 	-- AND Bullhornuserid IN('12649', '26219')
-	AND Recordtype = 1
 
 
 UPDATE A
