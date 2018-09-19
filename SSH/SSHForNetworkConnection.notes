@@ -1,0 +1,63 @@
+Ping:
+*****
+X:\>ping migratefs01
+Pinging migratefs01.bh-bos2.bullhorn.com [10.76.9.10] with 32 bytes of data:
+Reply from 10.76.9.10: bytes=32 time=11ms TTL=252
+
+LogIn:
+******
+putty.exe -ssh -t rsmith@migratefs01.bh-bos2.bullhorn.com -pw Zkyn4CoKo/rfnWCvrwczMaYI
+
+Change Directory:
+*****************
+cd /bullhorn/files1/UserFiles/UserWorkFiles/
+cd /bullhorn/files1/UserFiles/UserAttachments/ClientCorporationFiles/
+
+recursive mkdir:
+****************
+mkdir -p rob/smith/c/smith
+
+Disk Use:
+*********
+du -sk /bullhorn/files1/UserFiles/UserWorkFiles/ | sort -n > NewText.txt &
+du -hcs /bullhorn/files1/UserFiles/ --
+du -sh */ > files.text -- Current Directory
+du -sk * | sort -n will sort the folders by size
+
+Free Space:
+***********
+df -h /bullhorn/files1/
+
+Are there any current processes:
+********************************
+ps -ef | grep unrar
+
+
+Disconnect from Terminal:
+*************************
+nohup command &>/dev/null &
+
+Unzip
+*****
+unzip 24518.zip
+unrar t 22816.rar
+
+Delete Fast (*Nix):
+************
+mkdir empty_dir
+rsync -a --delete empty_dir/    16035/
+rsync -a -r --delete empty_dir/    20549/ &
+del /f/s/q 23858_DNU > nul
+rmdir /s/q foldername
+
+
+Delete Fast (PowerShell):
+$fso = New-Object -ComObject scripting.filesystemobject
+Measure-Command {$fso.DeleteFolder("\\migratefs01\UserFiles\UserWorkFiles\23858_DNU",$true)}
+
+
+
+**** Map to UnC
+pushd \\titcanic\data
+
+\\migratefs01\UserFiles\UserWorkFiles\24518\2018.6\9\409160.doc
