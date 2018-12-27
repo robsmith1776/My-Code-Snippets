@@ -1,17 +1,17 @@
 <CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
 <_locDefinition xmlns="urn:locstudio">
     <_locDefault _loc="locNone" />
-    <_locTag _loc="locData">SelectInto</_locTag>
-    <_locTag _loc="locData">SelectIntoTables</_locTag>
+    <_locTag _loc="locData">MasterUsers</_locTag>
+    <_locTag _loc="locData">MasterUsersTables</_locTag>
     <_locTag _loc="locData">RobertSmith</_locTag>
     <_locTag _loc="locData">ToolTip</_locTag>
    <_locTag _loc="locData">Default</_locTag>
 </_locDefinition>
 <CodeSnippet Format="1.0.0">
 <Header>
-<Title>Extended SelectInto Template</Title>
+<Title>Extended MasterUsers Template</Title>
        <Shortcut></Shortcut>
-<Description>Example Snippet for SelectInto</Description>
+<Description>Example Snippet for MasterUsers</Description>
 <Author>RobertSmith</Author>
 <SnippetTypes>
       <SnippetType>Expansion</SnippetType>
@@ -24,15 +24,13 @@
     <ToolTip>Name of the schema</ToolTip>
     <Default>pstmp</Default>
   </Literal>
-  <Literal>
-  	<ID>TableName</ID>
-  	<ToolTip>Name of the table</ToolTip>
-  	<Default>pstmp_2018MMDD_Temp_</Default>
-	</Literal>
 </Declarations>
 <!-- A comment here must be an XML comment, not a T-SQL comment -->
-<Code Language="SQL"><![CDATA[-- drop table $SchemaName$.$TableName$
-into $SchemaName$.$TableName$
+<Code Language="SQL">
+<![CDATA[  select u.masterUserID from $SchemaName$.Bullhorn1.BH_UserContact uc
+           inner join $SchemaName$.Bullhorn1.bh_user u
+           on uc.userID = u.userID
+           where recordTypeBits = 4
 ]]>
 </Code>
 </Snippet>
