@@ -1,0 +1,64 @@
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">SelectInto</_locTag>
+    <_locTag _loc="locData">SelectIntoTables</_locTag>
+    <_locTag _loc="locData">RobertSmith</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+<CodeSnippet Format="1.0.0">
+<Header>
+<Title>Addison</Title>
+       <Shortcut></Shortcut>
+<Description>Example Snippet for SelectInto</Description>
+<Author>RobertSmith</Author>
+<SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+</SnippetTypes>
+</Header>
+<Snippet>
+<Declarations>
+  <Literal>
+    <ID>MasterDB</ID>
+    <ToolTip>MasterDB</ToolTip>
+    <Default>Bullhorn7683</Default>
+  </Literal>
+  <Literal>
+  	<ID>TableName</ID>
+  	<ToolTip>Name of the TableName</ToolTip>
+  	<Default>BH_user</Default>
+  </Literal>
+  <Literal>
+  	<ID>MigTable</ID>
+  	<ToolTip>Name of the MigTable</ToolTip>
+  	<Default>_person</Default>
+  </Literal>
+  <Literal>
+	<ID>MigColumn</ID>
+  	<ToolTip>Name of the MigColumn</ToolTip>
+  	<Default>Externalid</Default>
+  </Literal>
+  <Literal>
+	<ID>AimColumn</ID>
+  	<ToolTip>Name of the AimColumn</ToolTip>
+  	<Default>Externalid</Default>
+  </Literal>
+</Declarations>
+<!-- A comment here must be an XML comment, not a T-SQL comment -->
+<Code Language="SQL"><![CDATA[Use $MasterDB$
+go
+
+SELECT COUNT(1)
+FROM   $MasterDB$.Bullhorn1.$TableName$ Adi
+	   INNER JOIN Addison_Aim_Mig_Template.Dbo.$MigTable$ Mig
+		   ON Adi.Externalid = Mig.$MigColumn$
+		   --and adi.migrateguid = mig.migrateguid
+		   --Adi.userid = mig.bullhornuserid
+	   INNER JOIN Bullhorn11865_Aimcopy.Bullhorn1.$TableName$ Aim
+			 ON Aim.$AimColumn$ = Mig.$MigColumn$
+]]>
+</Code>
+</Snippet>
+</CodeSnippet>
+</CodeSnippets>
